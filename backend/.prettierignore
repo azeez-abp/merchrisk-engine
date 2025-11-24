@@ -1,0 +1,6 @@
+# .prettierignore
+dist/
+coverage/
+node_modules/
+*.log
+lcov-report/
