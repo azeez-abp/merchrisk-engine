@@ -1,4 +1,4 @@
-import express, { Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import { morganMiddleware } from './monitoring/morgan';
 import { logger } from './monitoring/winston';
 import helmet from 'helmet';
