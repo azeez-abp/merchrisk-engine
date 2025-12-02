@@ -36,7 +36,10 @@ jobs:
 
       - name: Install dependencies
         working-directory: ${{ inputs['app-path'] }}
-        run: npm install
+        run: |
+          pwd
+          ls -al
+          npm install
 
       - name: Run lint
         run: |
