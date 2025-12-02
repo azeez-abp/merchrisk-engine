@@ -7,4 +7,4 @@ export interface LLMAnalysisDTO {
   riskReasons: string[];
   modelName: string;     // UPDATED
   tokensUsed: number;
-}
+};
