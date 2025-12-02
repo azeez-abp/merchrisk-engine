@@ -1,4 +1,4 @@
-name: Test Reusable Workflows
+name: Lint Reusable Workflows
 
 on:
   workflow_call:
