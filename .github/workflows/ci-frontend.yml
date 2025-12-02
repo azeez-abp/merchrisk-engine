@@ -16,3 +16,9 @@ jobs:
       node-version: '22.16.0'
       run-lint: true
       app-path: './frontend'
+  test-frontend:
+    uses: ./.github/workflows/test-re-usable.yml
+    with:
+      node-version: '22.16.0'
+      run-tests: false
+      app-path: './frontend'

@@ -26,3 +26,32 @@ on:
         required: true
         type: string
         #default: './merchrisk-engine/backend'
+jobs:
+  test:
+    if: ${{ inputs.run-tests }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs['node-version'] }}
+
+      - name: Install dependencies
+        working-directory: ${{ inputs['app-path'] }}
+        run: |
+          pwd
+          ls -al
+          npm install
+
+      - name: Run tests
+        run: |
+          pwd
+          ls -al
+          cd ${{ inputs['app-path'] }}
+          pwd
+          ls -al
+          npm run test
