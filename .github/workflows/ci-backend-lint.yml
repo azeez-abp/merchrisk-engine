@@ -1,0 +1,18 @@
+name: CI Backend Lint
+on:
+  push:
+    paths:
+      - './backend/**'
+    branches:
+      - dev
+  pull_request:
+    paths:
+      - './backend/**'
+
+jobs:
+  lint-backend:
+    uses: ./.github/workflows/lint-reusable.yml
+    with:
+      node-version: '22.16.0'
+      run-lint: true
+      app-path: './backend'

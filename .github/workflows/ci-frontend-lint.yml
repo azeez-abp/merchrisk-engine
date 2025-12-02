@@ -1,0 +1,18 @@
+name: CI Frontend Lint
+on:
+  push:
+    paths:
+      - './frontend/**'
+    branches:
+      - dev
+  pull_request:
+    paths:
+      - './frontend/**'
+
+jobs:
+  lint-frontend: 
+    uses: ./.github/workflows/lint-reusable.yml
+    with:
+      node-version: '22.16.0'
+      run-lint: true
+      app-path: './frontend'

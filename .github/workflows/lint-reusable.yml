@@ -1,0 +1,48 @@
+name: Test Reusable Workflows
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js version to use'
+        required: false
+        type: string
+        default: '22.16.0'
+      run-lint:
+        description: 'Whether to run lint'
+        required: false
+        type: boolean
+        default: true
+      app-path:
+        description: 'Path to the application'
+        required: true
+        type: string
+        #default: './merchrisk-engine/backend'
+
+
+jobs:
+  lint:
+    if: ${{ inputs.run-lint }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs['node-version'] }}
+
+      - name: Install dependencies
+        working-directory: ${{ inputs['app-path'] }}
+        run: npm install
+
+      - name: Run lint
+        run: |
+          pwd
+          ls -al
+          cd ${{ inputs['app-path'] }}
+          pwd
+          ls -al
+          npm run lint

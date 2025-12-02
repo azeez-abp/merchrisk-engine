@@ -1,0 +1,62 @@
+name: Release Pipeline
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ---------- CHECKOUT ----------
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ---------- ZIP THE TAG ----------
+      - name: Create release ZIP
+        run: |
+          zip -r release-${GITHUB_REF_NAME}.zip .
+
+      # ---------- UPLOAD TO JFROG ARTIFACTORY ----------
+      - name: Upload to JFrog Artifactory
+        run: |
+          curl -u "${{ secrets.JFROG_USER }}:${{ secrets.JFROG_API_KEY }}" \
+            -T release-${GITHUB_REF_NAME}.zip \
+            "https://yourcompany.jfrog.io/artifactory/releases/release-${GITHUB_REF_NAME}.zip"
+
+      # ---------- BUILD DOCKER IMAGE ----------
+      - name: Build Docker Image
+        run: |
+          docker build -t yourregistry/merchrisk:${GITHUB_REF_NAME} .
+
+      # ---------- PUSH TO REGISTRY (JFROG OR ANY DOCKER REGISTRY) ----------
+      - name: Login to registry
+        run: |
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login yourregistry --username "${{ secrets.REGISTRY_USER }}" --password-stdin
+
+      - name: Push Image
+        run: |
+          docker push yourregistry/merchrisk:${GITHUB_REF_NAME}
+
+  deploy:
+    needs: build-and-upload
+    runs-on: ubuntu-latest
+
+    steps:
+      # ---------- CONFIGURE KUBECTL ----------
+      - name: Setup kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          export KUBECONFIG=./kubeconfig
+
+      # ---------- DEPLOY TO KUBERNETES ----------
+      # You can use plain kubectl OR Helm
+
+      - name: Deploy using kubectl
+        run: |
+          kubectl set image deployment/merchrisk \
+            merchrisk=yourregistry/merchrisk:${GITHUB_REF_NAME}
+
+          kubectl rollout status deployment/merchrisk

@@ -1,0 +1,28 @@
+name: Test Reusable Workflows
+# on:
+#   push:
+#     paths:
+#       - 'merchrisk-engine/bakend/**'
+#     branches:
+#       - main
+#   pull_request:
+#     paths:
+#       - 'merchrisk-engine/**'
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js version to use'
+        required: false
+        type: string
+        default: '22.16.0'
+      run-tests:
+        description: 'Whether to run tests'
+        required: false
+        type: boolean
+        default: true
+      app-path:
+        description: 'Path to the application'
+        required: true
+        type: string
+        #default: './merchrisk-engine/backend'
