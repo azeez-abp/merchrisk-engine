@@ -2,12 +2,12 @@ name: CI Backend Lint
 on:
   push:
     paths:
-      - './backend/**'
+      - 'backend/**'
     branches:
       - dev
   pull_request:
     paths:
-      - './backend/**'
+      - 'backend/**'
 
 jobs:
   lint-backend:

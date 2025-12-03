@@ -564,3 +564,4 @@ Tell me:
 
 I can generate **exact migration SQL + Prisma schema + deployment sequence** tailored to your system.
 
+
