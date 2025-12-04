@@ -1,4 +1,4 @@
-name: CI Frontend Lint
+name: CI Frontend Pipeline
 on:
   push:
     paths:
