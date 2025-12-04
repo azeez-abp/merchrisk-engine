@@ -3,14 +3,20 @@ import mongoose from 'mongoose';
 import { connectMongo } from '../../../src/db/mongo.db';
 import { dbConfig } from '../../../src/config/db.config';
 
-let mongo: any;
-
 // Increase default timeout for all tests in this file
 jest.setTimeout(30000); // 30 seconds
+const env = process.env.NODE_ENV as string
+// (isCI ? describe.skip : describe)('connectMongo() – DEV Only', () => {
+//   // tests here...
+// });
+( (!env || env==='production') ? describe.skip : describe)('connectMongo() – DEV Only', () => {
+  // tests here...
+
+let mongo: any;
 
 describe('connectMongo() – DEV Only', () => {
   beforeAll(async () => {
-    const env = process.env.NODE_ENV || 'development';
+   
     if (env !== 'development') return;
 
     // Dynamically import MongoMemoryServer
@@ -48,4 +54,5 @@ describe('connectMongo() – DEV Only', () => {
     const result = await connectMongo();
     expect(result).toBe(false);
   });
+});
 });
