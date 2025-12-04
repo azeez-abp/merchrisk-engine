@@ -2,12 +2,12 @@ name: CI Backend Lint
 on:
   push:
     paths:
-      - 'merchrisk-engine/backend/**'
+      - 'backend/**'
     branches:
       - dev
   pull_request:
     paths:
-      - 'merchrisk-engine/backend/**'
+      - 'backend/**'
 
 jobs:
   lint-backend:

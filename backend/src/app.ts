@@ -3,7 +3,6 @@ import { morganMiddleware } from './monitoring/morgan';
 import { logger } from './monitoring/winston';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-//console.log("[app.ts module]", require.main)
 export const app = express();
 
 app.use(helmet());
