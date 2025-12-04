@@ -1,4 +1,4 @@
-name: Lint Reusable Workflows
+name: Format Reusable Workflows
 
 on:
   workflow_call:
@@ -8,8 +8,8 @@ on:
         required: false
         type: string
         default: '22.16.0'
-      run-lint:
-        description: 'Whether to run lint'
+      run-format:
+        description: 'Whether to run format'
         required: false
         type: boolean
         default: true
@@ -37,9 +37,10 @@ jobs:
       - name: Install dependencies
         working-directory: ${{ inputs['app-path'] }}
         run: |
-          npm install
+          npm ci
 
       - name: Run lint
         run: |
           cd ${{ inputs['app-path'] }}
-          npm run lint
+          ls -al node_modules
+          npm run fmt

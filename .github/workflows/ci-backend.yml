@@ -24,3 +24,10 @@ jobs:
       node-version: '22.16.0'
       run-tests: true
       app-path: './backend'
+  fmt-backend:
+    uses: ./.github/workflows/format-reusable.yml
+    with:
+      node-version: '22.16.0'
+      run-format: true
+      app-path: './backend'
+  

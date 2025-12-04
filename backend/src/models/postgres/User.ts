@@ -2,7 +2,7 @@ import {
   Table, Column, DataType, Model, PrimaryKey, Default,
   AutoIncrement,
 } from "sequelize-typescript";
-import { Col } from "sequelize/types/utils";
+
 
 @Table({ tableName: "Users" })
 export class User extends Model {
