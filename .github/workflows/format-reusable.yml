@@ -21,8 +21,8 @@ on:
 
 
 jobs:
-  lint:
-    if: ${{ inputs.run-lint }}
+  format:
+    if: ${{ inputs.run-format }}
     runs-on: ubuntu-latest
 
     steps:
