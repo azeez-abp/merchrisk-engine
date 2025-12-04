@@ -4,10 +4,12 @@ on:
     paths:
       - 'backend/**'
     branches:
-      - dev
+      - master
   pull_request:
     paths:
       - 'backend/**'
+    branches:
+      - master
 
 jobs:
   lint-backend:
