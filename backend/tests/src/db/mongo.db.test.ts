@@ -6,10 +6,11 @@ import { dbConfig } from '../../../src/config/db.config';
 // Increase default timeout for all tests in this file
 jest.setTimeout(30000); // 30 seconds
 const env = process.env.NODE_ENV as string
+
 // (isCI ? describe.skip : describe)('connectMongo() – DEV Only', () => {
 //   // tests here...
 // });
-( (!env || env==='production') ? describe.skip : describe)('connectMongo() – DEV Only', () => {
+( (!env || env==='production' || dbConfig.mongoURI === undefined) ? describe.skip : describe)('connectMongo() – DEV Only', () => {
   // tests here...
 
 let mongo: any;
