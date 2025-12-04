@@ -10,7 +10,8 @@ jest.setTimeout(30000); // 30 seconds
 
 describe('connectMongo() – DEV Only', () => {
   beforeAll(async () => {
-    if (process.env.NODE_ENV !== 'development') return;
+    const env = process.env.NODE_ENV || 'development';
+    if (env !== 'development') return;
 
     // Dynamically import MongoMemoryServer
     const { MongoMemoryServer } = await import('mongodb-memory-server');
